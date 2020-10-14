@@ -14,7 +14,7 @@ plain='\033[0m'
 
 site='http://www.yinyihanbing.com'
 host='www.yinyihanbing.com'
-ip='47.242.20.217'
+ip='47.242.163.198'
 
 function checkSystem()
 {
