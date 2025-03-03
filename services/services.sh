@@ -17,6 +17,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     -n|--name)
       PROJECT_NAME="$2"
+      SERVICE_FILE="/etc/systemd/system/${PROJECT_NAME}.service"
       shift 2
       ;;
     -u|--user)
