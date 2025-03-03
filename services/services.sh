@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# ./services.sh -n miniwebdir -u root -g root -d "$(pwd)/bin" -a miniwebdir install
+# ./services.sh -n miniwebdir -u root -g root -d "$(pwd)/" -a miniwebdir install
 # ./services.sh -n miniwebdir uninstall
 # ./services.sh -n miniwebdir start
 # ./services.sh -n miniwebdir stop
 
 PROJECT_NAME="miniwebdir"
-USER="jenkins"
-GROUP="jenkins"
-WORKING_DIRECTORY="$(pwd)/bin/"
+USER="root"
+GROUP="root"
+WORKING_DIRECTORY="$(pwd)/"
 APP_NAME="miniwebdir"
 ENVIRONMENT="production"
 SERVICE_FILE="/etc/systemd/system/${PROJECT_NAME}.service"
