@@ -1,17 +1,16 @@
 #!/bin/bash
 
-# ./services.sh -n ggweb -u root -g root -d "$(pwd)/bin" install
-# ./services.sh -n ggweb uninstall
-# ./services.sh -n ggweb start
-# ./services.sh -n ggweb stop
+# ./services.sh -n miniwebdir -u root -g root -d "$(pwd)/bin" -a miniwebdir install
+# ./services.sh -n miniwebdir uninstall
+# ./services.sh -n miniwebdir start
+# ./services.sh -n miniwebdir stop
 
-PROJECT_NAME="ggweb"
+PROJECT_NAME="miniwebdir"
 USER="jenkins"
 GROUP="jenkins"
 WORKING_DIRECTORY="$(pwd)/bin/"
+APP_NAME="miniwebdir"
 ENVIRONMENT="production"
-
-APP_PATH="${WORKING_DIRECTORY}/${PROJECT_NAME}"
 SERVICE_FILE="/etc/systemd/system/${PROJECT_NAME}.service"
 
 while [[ $# -gt 0 ]]; do
@@ -36,6 +35,10 @@ while [[ $# -gt 0 ]]; do
       ENVIRONMENT="$2"
       shift 2
       ;;
+    -a|--appname)
+      APP_NAME="$2"
+      shift 2
+      ;;
     *)
       break
       ;;
@@ -55,7 +58,7 @@ case $ACTION in
 		echo "Description=${PROJECT_NAME} service" | sudo tee -a ${SERVICE_FILE}
 		echo "After=network.target" | sudo tee -a ${SERVICE_FILE}
 		echo "[Service]" | sudo tee -a ${SERVICE_FILE}
-		echo "ExecStart=${APP_PATH}" | sudo tee -a ${SERVICE_FILE}
+		echo "ExecStart=${WORKING_DIRECTORY}/${APP_NAME}" | sudo tee -a ${SERVICE_FILE}
 		echo "Restart=always" | sudo tee -a ${SERVICE_FILE}
 		echo "User=${USER}" | sudo tee -a ${SERVICE_FILE}
 		echo "Group=${GROUP}" | sudo tee -a ${SERVICE_FILE}
